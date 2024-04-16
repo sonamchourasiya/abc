@@ -9,10 +9,11 @@ mongoose.connect('mongodb://localhost:27017/mydb', { useNewUrlParser: true, useU
     console.error('Error connecting to MongoDB:', err);
   });
 
-const userSchema = new Schema({
-  ts: String,
+const dataSchema = new Schema({
   machine_status: Number,
-  vibration: Number
+  ts: String,
+  vibration: Number,
 });
 
-const User = mongoose.model('User', userSchema);
+const Data = mongoose.model("machineData", dataSchema);
+module.exports = Data;
