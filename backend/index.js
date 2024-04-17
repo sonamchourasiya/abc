@@ -1,24 +1,10 @@
-const express = require("express");
-const cors = require("cors");
-// const data = require("./routes/data");
-const Data = require("./app");
+require("./config/database");
+const router = require("./routes/route")
+const express = require('express');
+const cors = require("cors")
+const app = express()
+app.use(cors())
+app.use(express.json())
+app.use("/api/data",router)
+app.listen(5000, () => console.log(`Server is running on port 5000`));
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-app.get('/data', async (req, res) => {
-    try {
-      const data = await Data.find(); // Fetch all users from MongoDB
-      res.json(data); // Send JSON response with users data
-
-    } catch (err) {
-      console.error('Error fetching users:', err);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-});
-
-
-app.listen(9999, ()=>{
-    console.log("server started at 9999");
-})
